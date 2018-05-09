@@ -196,6 +196,15 @@ function _M.Pinyin (self, ustring, flat, keepNull)
     return stringArray
 end
 
+
+function _M.slugify(self, title)
+  return (table.concat(Pinyin(title, true), "-"))
+    :gsub("[^a-z0-9]", "-")
+    :gsub("-+", '-') -- remove duplicated `-`
+    :gsub("-$", "") 
+end
+
+
 --print(table.concat(Pinyin("汉语拼音", true), "-"))
 
 
