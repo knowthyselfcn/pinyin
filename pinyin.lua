@@ -1,5 +1,5 @@
-local dict = require("dict-zi")
-local bit = require("bit")
+local dict = require("pinyin.dict-zi")
+local bit = require("pinyin.bit")
 
 local find, sub = string.find, string.sub
 
