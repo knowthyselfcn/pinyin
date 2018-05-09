@@ -1,16 +1,20 @@
 local dict = require("pinyin.dict-zi")
 local bit = require("pinyin.bit")
-
 local find, sub = string.find, string.sub
 
-local _M = { _VERSION = "0.1.0"};
+-------------------------------------------------------------------------
+local _M = { _VERSION = '0.1.0'};
+local mt = { __index = _M }
 
+function _M.new(self)
+    return setmetatable({  }, mt)
+end
 
 _M.dict = dict
+-------------------------------------------------------------------------
 
 
-
-local split = function(str, sep, nmax)
+function split(str, sep, nmax)
     if sep == nil then
         sep = '%s+'
     end
@@ -142,7 +146,7 @@ function num2hex(num)
 end
 
 
-function _M.Pinyin (self, ustring, flat, keepNull)
+function _M.Pinyin(self, ustring, flat, keepNull)
     local stringArray = {}
     local tempAlphas = {}
     string.gsub(ustring, "([%z\1-\127\194-\244][\128-\191]*)", function(singleAlpha, b)
@@ -196,22 +200,12 @@ function _M.Pinyin (self, ustring, flat, keepNull)
     return stringArray
 end
 
-
 function _M.slugify(self, title)
-  return (table.concat(Pinyin(title, true), "-"))
+  return (table.concat(_M.Pinyin(title, true), "-"))
     :gsub("[^a-z0-9]", "-")
     :gsub("-+", '-') -- remove duplicated `-`
     :gsub("-$", "") 
 end
-
-
---print(table.concat(Pinyin("汉语拼音", true), "-"))
-
-
-function _M.new(self)
-    return setmetatable({  }, { __index = _M }  )
-end
-
 
 
 return _M
