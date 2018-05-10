@@ -201,7 +201,7 @@ function _M.Pinyin(self, ustring, flat, keepNull)
 end
 
 function _M.slugify(self, title)
-  return (table.concat( _M.Pinyin(title, true), "-"))
+  return (table.concat( self:Pinyin(title, true), "-"))
     :gsub("[^a-z0-9]", "-")
     :gsub("-+", '-') -- remove duplicated `-`
     :gsub("-$", "") 
