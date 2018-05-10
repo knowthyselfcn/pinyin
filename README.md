@@ -6,6 +6,7 @@ bit.lua lib从 https://raw.githubusercontent.com/gourytch/freeminer_mods/master/
 data 文件从hotoo/pinyin lib中获取的，由js数组修改为lua table。
 
 使用方式：
+
   local pinyin = require("pinyin.pinyin"):new()
   
   pinyin:slugify( "这是一个中文字符串")
